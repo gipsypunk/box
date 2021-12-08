@@ -1,0 +1,19 @@
+
+configuration {
+	font:							"Dejavue Sans Mono 10";
+    show-icons:                     true;
+	icon-theme: 					"Papirus";
+    display-drun: 					"";
+    display-run:                    " ";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+	sidebar-mode: 					false;
+    modi:                           "window,run,drun";
+}
+
+
+//@theme "launchpad.rasi"
+//@import "myConfig"
+
+//@theme "/usr/share/rofi/themes/blurry.rasi"
+@theme "/usr/share/rofi/themes/launchpad.rasi"

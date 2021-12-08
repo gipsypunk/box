@@ -1,0 +1,52 @@
+UXTerm*faceName: Monospace Regular
+UXTerm*faceSize: 9
+UXTerm*vt100*geometry: 100x30
+UXTerm*saveLines: 5000
+UXTerm*loginShell: true
+UXTerm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
+UXTerm*termName: xterm-color
+UXTerm*eightBitInput: false
+UXTerm*visualBell: false
+!UXTerm*bellIsUrgent: true
+UXTerm*borderWidth: 0
+UXTerm*cursorBlink: true
+UXTerm*selectToClipboard: true
+UXTerm*rightScrollBar: false
+UXTerm*scrollBar: false
+!UXTerm*foreground: #00ff00
+UXTerm*background: #1E1E1E
+UXTerm*cursorColor: #4CBB17
+xterm*VT100.Translations: #override \
+                 Ctrl <Key>V:    insert-selection(CLIPBOARD) \n\
+                 Ctrl <Key>C:    copy-selection(CLIPBOARD)
+
+!==============================================================================
+!Colors
+!==============================================================================
+UXTerm*colorBD:     
+UXTerm*background:  #1E1E1E
+UXTerm*foreground:  #b4b4b4
+! Чёрный
+UXTerm*color0:      #000000
+UXTerm*color8:      #555753
+! Красный
+UXTerm*color1:      #b6212d
+UXTerm*color9:      #ff6565
+! Зелёный
+UXTerm*color2:      #4c8d00
+UXTerm*color10:     #6bbe1a
+! Жёлтый
+UXTerm*color3:      #ff8040
+UXTerm*color11:     #e6d51d
+! Синий
+UXTerm*color4:      #0086d2
+UXTerm*color12:     #00d2ff
+! Маджента
+UXTerm*color5:      #963c59
+UXTerm*color13:     #d3649f
+! Циановый
+UXTerm*color6:      #105952
+UXTerm*color14:     #177f75
+! Белый
+UXTerm*color7:      #cdcaa9
+UXTerm*color15:     #ffffff

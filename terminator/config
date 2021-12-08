@@ -1,0 +1,32 @@
+[global_config]
+  borderless = True
+  always_on_top = True
+[keybindings]
+  copy = <Primary>c
+  paste = <Primary>v
+  close_window = <Shift><Super>q
+[profiles]
+  [[default]]
+    allow_bold = False
+    background_color = "#1c1c1c"
+    background_darkness = 0.89
+    cursor_color = "#aaaaaa"
+    font = Cascadia Mono PL 10
+    foreground_color = "#7fff00"
+    show_titlebar = False
+    scrollbar_position = hidden
+    disable_mousewheel_zoom = True
+    palette = "#000000:#ff2b2b:#4cbb17:#ff8040:#0086d2:#963c59:#177f75:#cdcaa9:#404040:#ff6565:#7fff00:#e6d51d:#00d2ff:#d3649f:#105952:#ffffff"
+    use_system_font = False
+    copy_on_selection = True
+  [[New Profile]]
+    cursor_color = "#aaaaaa"
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]

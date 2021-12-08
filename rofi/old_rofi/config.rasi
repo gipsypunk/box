@@ -1,0 +1,14 @@
+/** Basic config file **/
+/** https://github.com/eirenicon **/
+//configuration {
+//  
+//  show-icons:         true;
+//  icon-theme:         "Papirus";
+//}
+@import "/home/user/.config/rofi/themes/mytheme.rasi"
+
+
+
+
+//@theme "/usr/share/rofi/themes/base.rasi"
+//@theme "/usr/share/rofi/themes/Pop-Dark.rasi"

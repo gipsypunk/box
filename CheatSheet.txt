@@ -1,0 +1,193 @@
+1. Подключение к сети 
+rfkill unblock all 
+systemctl start sshd
+iwctl
+device list
+station wlan0 connect YOUR-SSID
+
+
+
+2. Форматирование и Шифровка 
+
+gdisk /dev/sda
+
+
++1024M ----------- ef00
+all ----------------- 8e00
+
+
+cryptsetup luksFormat /dev/sda2
+cryptsetup open /dev/sda2 cryptlvm
+
+pvcreate  /dev/mapper/cryptlvm
+vgcreate volume /dev/mapper/cryptlvm
+
+lvcreate -L 4915.2M volume -n swap
+lvcreate -L 61440M volume -n root
+lvcreate -l 100%FREE volume -n home
+
+mkfs.fat -F32 /dev/sda1
+mkfs.ext4 /dev/volume/root
+mkfs.ext4 /dev/volume/home
+mkswap  /dev/volume/swap
+
+
+3. Монтаж разделов
+mount /dev/volume/root /mnt
+mkdir /mnt/home
+mount /dev/volume/home /mnt/home
+swapon /dev/volume/swap
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot
+
+pacstrap -i /mnt base linux linux-firmware gvim intel-ucode lvm2
+genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+arch-chroot /mnt
+
+4. Локализация 
+
+timedatectl list-timezones | grep Bucharest
+ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
+hwclock --systohc
+
+timedatectl list-timezones | grep Amsterdam
+ln -sf /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+hwclock --systohc
+
+
+
+
+
+
+vim /etc/locale.gen
+locale-gen
+
+vim /etc/locale.conf
+LANG=en_US.UTF-8
+
+vim /etc/vconsole.conf
+LANG=en_US.UTF-8
+
+
+5. Конфигурация сети
+vim /etc/hostname
+box
+
+vim /etc/hosts
+
+# Host addresses
+127.0.0.1  localhost
+127.0.1.1  box
+::1        localhost ip6-localhost ip6-loopback
+ff02::1    ip6-allnodes
+ff02::2    ip6-allrouters
+
+6. Основа
+
+pacman -S grub efibootmgr networkmanager wireless_tools wpa_supplicant dialog os-prober mtools dosfstools linux-headers git reflector openssh cups sudo raw-thumbnailer file-roller gvfs gvfs-smb sshfs udevil xdg-user-dirs xdg-utils gvfs udev udisks2 ntfs-3g base-devel 
+
+
+sudo reflector -c Romania --sort rate --save /etc/pacman.d/mirrorlist
+
+7. mkinitcpio and grub
+vim /etc/mkinitcpio.conf
+
+HOOKS=(base udev autodetect keyboard keymap modconf block encrypt lvm2 filesystems keyboard fsck)
+
+mkinitcpio -p linux
+
+
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+
+blkid /dev/sda2
+
+
+vim /etc/default/grub
+cryptdevice=UUID:cryptlvm root=/dev/volume/root
+
+GRUB_CMDLINE_LINUX="cryptdevice=UUID=27733c5c-69b5-4d11-a35b-f648cdda7f49:cryptlvm root=/dev/volume/root"
+
+cryptdevice=UUID=27a90065-edd2-4a01-a50c-01d7a09f4d3d:cryptlvm root=/dev/volume/root
+
+grub-mkconfig -o /boot/grub/grub.cfg
+
+
+
+systemctl enable NetworkManager
+systemctl enable sshd
+systemctl enable cups
+
+
+8. Добовляем пользователя 
+passwd *для рута*
+
+useradd -mG wheel user
+passwd user
+
+EDITOR=vim visudo
+%wheel ALL=(ALL) ALL
+
+9. Passwd
+passwd
+
+exit
+umount -R /mnt 
+umount -a
+reboot
+
+
+-------------------------------------
+
+
+
+git clone https://notabug.org/gipsypunk/box.git
+sh ~/box/dots/install.sh
+sh ~/box/dots/BlackArch.sh
+sh ~/box/dots/yay.sh
+
+
+
+nmcli device wifi list
+nmcli device wifi connect SSID password 'passXXX'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
